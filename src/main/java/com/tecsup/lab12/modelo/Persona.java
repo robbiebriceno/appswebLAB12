@@ -9,7 +9,6 @@ public class Persona {
         this.edad = edad;
     }
 
-    // Getters y setters
     public String getNombre() {
         return nombre;
     }
