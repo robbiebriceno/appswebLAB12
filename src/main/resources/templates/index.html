@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Estudiantes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Tema moderno de Bootswatch (Flatly) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container py-5">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="text-primary">Estudiantes Registrados</h2>
+                <a th:href="@{/estudiantes/nuevo}" class="btn">Nuevo Estudiante</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered text-center">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Carrera</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="e : ${estudiantes}">
+                        <td th:text="${e.nombre}">Nombre</td>
+                        <td th:text="${e.apellido}">Apellido</td>
+                        <td th:text="${e.correo}">Correo</td>
+                        <td th:text="${e.carrera}">Carrera</td>
+                        <td>
+                            <a th:href="@{'/estudiantes/editar/' + ${e.id}}" class="btn btn-sm btn-warning">Editar</a>
+                            <a th:href="@{'/estudiantes/eliminar/' + ${e.id}}"
+                               onclick="return confirm('¿Eliminar este estudiante?')"
+                               class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(estudiantes)}">
+                        <td colspan="5" class="text-muted">No hay estudiantes registrados.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

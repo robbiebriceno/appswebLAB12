@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Formulario de Estudiante</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Tema moderno de Bootswatch (Flatly) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container py-5">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0" th:text="${estudiante.id != null ? 'Editar Estudiante' : 'Nuevo Estudiante'}"></h3>
+    </div>
+    <div class="card-body">
+      <form th:action="@{/estudiantes/guardar}" th:object="${estudiante}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="mb-3">
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-control" th:field="*{nombre}" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Apellido</label>
+          <input type="text" class="form-control" th:field="*{apellido}" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Correo</label>
+          <input type="email" class="form-control" th:field="*{correo}" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Carrera</label>
+          <input type="text" class="form-control" th:field="*{carrera}" required />
+        </div>
+        <button type="submit" class="btn w-100">Guardar</button>
+      </form>
+      <div class="mt-3 text-center">
+        <a th:href="@{/estudiantes}" class="btn btn-outline-secondary">Volver</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
